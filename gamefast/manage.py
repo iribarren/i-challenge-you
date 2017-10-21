@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "no_hay_huevos.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamefast.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
