@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     #password = serializers.CharField(write_only=True)
     #email = EmailField(allow_blank=True, label='Email address', max_length=254, required=False,validators=[UniqueValidator(queryset=User.objects.all())])
-    email = EmailField(max_length=254,validators=[UniqueValidator(queryset=User.objects.all())])
+    email = EmailField(max_length=254,validators=[UniqueValidator(queryset=User.objects.all().values('email'))])
 
     def create(self, validated_data):
 
@@ -33,3 +33,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('username','email','first_name','last_name', 'password')
+        extra_kwargs = {'email': {'required': 'True', 'validators': [UniqueValidator(queryset=User.objects.all().values('email'))]}}
