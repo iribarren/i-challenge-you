@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'challenge',
     'rest_framework',
     'rest_framework.authtoken',
+    'inventory',
 ]
 
 MIDDLEWARE = [
