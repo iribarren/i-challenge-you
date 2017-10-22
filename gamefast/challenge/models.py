@@ -10,7 +10,7 @@ class Game(models.Model):
     def __str__(self):
         return self.name
     
-    def add(self):pass
+    def add(self,user):pass
     def edit(self):pass
     def remove(self):pass
     def show(self):

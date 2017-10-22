@@ -31,7 +31,7 @@ class Profile(models.Model):
     def __str__(self):
         return u'{0} (xp:{1} / pepitas:{2})'.format(self.user,self.xp,self.pepitas)
 
-    def add(self): pass
+    def add(self, user): pass
 
     def show(self):
         return self
@@ -39,6 +39,6 @@ class Profile(models.Model):
     def remove(self): pass
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
+def create_profile(sender, instance=None, created=False, **kwargs):
     if created:
-        Token.objects.create(user=instance)
+        Profile.objects.create(user=instance)

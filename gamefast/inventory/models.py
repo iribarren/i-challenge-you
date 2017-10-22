@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -31,3 +33,9 @@ class Item (models.Model):
     def edit(self): pass
     def show(self):
         return self;
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_inventory(sender, instance=None, created=False, **kwargs):
+    if created:
+        Inventory.objects.create(user=instance)
