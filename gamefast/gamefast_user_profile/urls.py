@@ -5,5 +5,5 @@ from .api import *
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^/users/create', CreateUserView.as_view, name='create-user'),
+    url(r'^create', CreateUserView.as_view()),
 ]
