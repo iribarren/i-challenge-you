@@ -73,6 +73,14 @@ class Action(models.Model):
         ct_instance = ct_class.objects.get(pk=self.object_id)
         return ct_instance
 
+    def add_action_history(self,user):
+        user_action = User.Action.create(
+            action = self,
+            user = user,
+            timestamp = timezone.now()
+        )
+        user_action.save()
+
     @staticmethod
     def run_actions(action_list, qr, user):
         now = timezone.now()
@@ -105,7 +113,9 @@ class Action(models.Model):
                     results.append({'action_id': action.pk, 'result': ct_instance.edit(action.content_object_field, action.content_object_field_value)})
                 else:
                     results.append({'action_id': action.pk, 'result': "Unsupported action"})
+                    continue #i dont want to add the action if its unsuppoerted
 
+                self.add_action_history(user)
                 #Break if stop
                 if action.stop == True:
                     break
