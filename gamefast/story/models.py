@@ -28,7 +28,7 @@ class Story(models.Model):
         return (
             (name, self.name),
             (content_type, self.content_type),
-            (data = self.data),)            
+            (data, self.data),
         )
     def remove(self,user): pass
     def edit(self, model_field, value): pass
